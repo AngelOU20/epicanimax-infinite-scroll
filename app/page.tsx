@@ -1,13 +1,15 @@
 // "use client";
 
 import { AnimeList, LoadMore } from '@/components';
+import { fetchAnimes } from '@/services/animes';
 import { AnimeProp } from '@/interfaces/interface';
 import { fetchAnime } from '@/services/action';
-import { fetchAnimes } from '@/services/animes';
 import { useEffect, useState } from 'react';
 
 export default async function Home () {
-  const data = await fetchAnime(1);
+  // const data = await fetchAnime(1);
+  const result = await fetchAnimes({ page: 1 });
+
   // const [animes, setAnimes] = useState<AnimeProp[]>([]);
 
   // useEffect(() => {
@@ -22,12 +24,7 @@ export default async function Home () {
   return (
     <main className="sm:p-16 py-16 px-8 flex flex-col gap-10">
       <h2 className="text-3xl text-white font-bold">Explore Anime</h2>
-      <section
-        className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10"
-      >
-        {data}
-      </section>
-      {/* <AnimeList animes={animes} /> */}
+      <AnimeList animes={result} />
       <LoadMore />
     </main>
   );
