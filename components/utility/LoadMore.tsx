@@ -1,12 +1,12 @@
 "use client";
 
 import { fetchAnimes } from "@/services/animes";
+import { fetchAnime } from "@/services/action";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { AnimeProp } from "@/interfaces/interface";
 import AnimeList from '../animes/AnimeList';
 import Image from "next/image";
-import { fetchAnime } from "@/services/action";
 
 let page: number = 2;
 
@@ -16,17 +16,27 @@ function LoadMore () {
   const { ref, inView } = useInView();
   // const [data, setData] = useState<AnimeProp[]>([]);
   const [data, setData] = useState<AnimeCard[]>([]);
-
   const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(() => {
   //   if (inView) {
-  //     fetchAnimes({ page: page }).then((res) => {
-  //       setData([...data, ...res]);
-  //       page++;
-  //     });
+  //     setIsLoading(true);
+  //     // Add a delay of 500 milliseconds
+  //     const delay = 500;
+
+  //     const timeoutId = setTimeout(() => {
+  //       fetchAnimes({ page }).then((res) => {
+  //         setData([...data, ...res]);
+  //         page++;
+  //       });
+
+  //       setIsLoading(false);
+  //     }, delay);
+
+  //     // Clear the timeout if the component is unmounted or inView becomes false
+  //     return () => clearTimeout(timeoutId);
   //   }
-  // }, [inView, data]);
+  // }, [inView, data, isLoading]);
 
   useEffect(() => {
     if (inView) {
