@@ -1,6 +1,6 @@
 "use server";
 
-const API_BASE_URL = "https://shikimori.one/api/animes";
+const API_BASE_URL = process.env.VITE_API_BASE_URL;
 
 const MAX_LIMIT = 8;
 const ORDER_TYPE = "popularity";
